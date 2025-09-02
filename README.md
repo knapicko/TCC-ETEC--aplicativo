@@ -10,10 +10,12 @@ Aplicativo TCC
 - Conexão a Firebase Auth e Realtime Database
 - Recuperação de Senha
 - Logout e manter login
+- Tela principal
+- Geolocalização com Leaflet e Android Studio (além de inserção manual de CEP por API ViaCep + Nominatim)
 
 # Funções (A adicionar)
 
-- Geolocalização
+
 - Mensagem entre paneleiro e cliente
 - Personalização de perfil (Paneleiro e cliente)
 - Data de nascimento, CPF/CNPJ, gênero, foto de perfil e CEP na personalização da conta
