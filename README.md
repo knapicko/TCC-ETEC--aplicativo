@@ -8,17 +8,19 @@ Aplicativo TCC
 - Login com Email e Senha
 - Login com Telefone (Com verificação de SMS)
 - Conexão a Firebase Auth e Realtime Database
-- Recuperação de Senha
+- Recuperação de Senha (Email e Telefone)
 - Logout e manter login
 - Tela principal
 - Geolocalização com Leaflet e Android Studio (além de inserção manual de CEP por API ViaCep + Nominatim)
+- Sistema de perfil (Paneleiro, cliente e food-service)
+- Sistema de salvar CEP
 
 # Funções (A adicionar)
 
-
+- Login com Facebook e Microsoft
 - Mensagem entre paneleiro e cliente
 - Personalização de perfil (Paneleiro e cliente)
-- Data de nascimento, CPF/CNPJ, gênero, foto de perfil e CEP na personalização da conta
+- CPF/CNPJ, gênero, foto de perfil e CEP na personalização da conta
 - Paneleiros poderem postar imagens em seu perfil
 - Sistema de pedido e entrega
 - Histórico de serviço
