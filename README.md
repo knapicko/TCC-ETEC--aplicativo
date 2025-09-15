@@ -17,7 +17,7 @@ Conserta Já - Aplicativo TCC
 
 # Funções (A adicionar)
 
-- Login com Facebook e Microsoft
+- Login com Facebook e X
 - Mensagem entre paneleiro e cliente
 - Personalização de perfil (Paneleiro e cliente)
 - CPF/CNPJ, gênero, foto de perfil e CEP na personalização da conta
