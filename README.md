@@ -14,13 +14,11 @@ Conserta Já - Aplicativo TCC
 - Geolocalização com Leaflet e Android Studio (além de inserção manual de CEP por API ViaCep + Nominatim)
 - Sistema de perfil (Paneleiro, cliente e food-service)
 - Sistema de salvar CEP
-
-# Funções (A adicionar)
-
-- Login com Facebook e X
-- Mensagem entre paneleiro e cliente
 - Personalização de perfil (Paneleiro e cliente)
 - CPF/CNPJ, gênero, foto de perfil e CEP na personalização da conta
+
+# Funções (A adicionar)
+- Mensagem entre paneleiro e cliente
 - Paneleiros poderem postar imagens em seu perfil
 - Sistema de pedido e entrega
 - Histórico de serviço
