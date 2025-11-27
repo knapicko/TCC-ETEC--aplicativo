@@ -16,14 +16,14 @@ Conserta Já - Aplicativo TCC
 - Sistema de salvar CEP
 - Personalização de perfil (Paneleiro e cliente)
 - CPF/CNPJ, gênero, foto de perfil e CEP na personalização da conta
-
-# Funções (A adicionar)
-- Mensagem entre paneleiro e cliente
-- Paneleiros poderem postar imagens em seu perfil
 - Sistema de pedido e entrega
 - Histórico de serviço
 - Confirmação e cancelamento de serviço
+- Mensagem entre paneleiro e cliente
+
+# Funções (A adicionar)
+
+- Paneleiros poderem postar imagens em seu perfil
 - Sistema de avaliação de serviço (1-5 Estrelas)
-- Modo escuro
 - Funções de acessibilidade
 - Área de suporte (FAQ)
