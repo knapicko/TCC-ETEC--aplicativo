@@ -33,7 +33,7 @@ O **Conserta Já** é uma solução mobile projetada para facilitar a contrataç
 * **Geolocalização Integrada:** Busca de endereço via GPS/Leaflet e inserção manual via CEP (APIs ViaCEP + Nominatim).
 * **Gerenciamento de CEP:** Salvamento e rápida seleção de endereços cadastrados.
 
-### 📋 Serviços e Pedidos
+### Serviços e Pedidos
 * **Fluxo Completo de Pedidos:** Abertura, confirmação, acompanhamento e cancelamento de serviços.
 * **Histórico:** Consulta a solicitações passadas e status detalhado dos atendimentos.
 * **Portfólio para Prestadores:** Postagem e exibição de fotos de trabalhos realizados no perfil do profissional.
