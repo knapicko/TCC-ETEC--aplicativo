@@ -44,11 +44,9 @@
 
 O projeto foi desenvolvido por uma equipe multidisciplinar:
 
-* **Flávio Henrique** — *Product Owner*
+* **Flávio Henrique** — *Líder do Grupo*
 * **Gabriel Santos** — *Desenvolvedor Back-end*
-* **Gustavo Almeida** — *Desenvolvedor Full-Stack e Designer*
 * **Leandro Oliveira** — *Designer e Analista*
-* **Lucas Eiji** — *Scrum Master e Analista*
 * **Luiz Knapick** — *Analista e Desenvolvedor Full-Stack*
 
 ---
