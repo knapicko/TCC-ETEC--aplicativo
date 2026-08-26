@@ -60,7 +60,7 @@ Você pode testar a **Conserta Já** de duas maneiras: utilizando o aplicativo p
 Se você deseja apenas testar o aplicativo sem precisar configurar um ambiente de desenvolvimento:
 
 1. Acesse a área de **[Releases](../../releases)** deste repositório.
-2. Baixe o arquivo `app-release.apk` (ou `Conserta Já - Final`).
+2. Baixe o arquivo `app-debug.apk`.
 3. Transfira para o seu dispositivo Android e execute-o para instalar.
 
 ---
