@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConsertaJá - Permissões</title>
+    <link rel="stylesheet" href="css/permissions.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="permissions-section">
+            <h2>Precisamos de algumas permissões</h2>
+            <p class="description">
+                Para oferecer a melhor experiência possível, precisamos de acesso a alguns recursos do seu dispositivo.
+                Todas as permissões são opcionais e você pode alterar suas preferências a qualquer momento nas configurações do app.
+            </p>
+
+            <div class="permissions-list">
+                <div class="permission-item">
+                    <div class="permission-icon">
+                        <img src="imgs/mapaicon.png" alt="Localização" style="width: 32px; height: 32px;">
+                    </div>
+                    <div class="permission-content">
+                        <h3>Localização</h3>
+                        <p>Para encontrar paneleiros próximos à sua região e calcular distâncias</p>
+                    </div>
+                    <div class="permission-status" id="location-status">Pendente</div>
+                </div>
+
+                <div class="permission-item">
+                    <div class="permission-icon">
+                        <img src="imgs/audio.png" alt="Microfone" style="width: 32px; height: 32px;">
+                    </div>
+                    <div class="permission-content">
+                        <h3>Microfone</h3>
+                        <p>Para gravação de mensagens de voz e chamadas</p>
+                    </div>
+                    <div class="permission-status" id="microphone-status">Pendente</div>
+                </div>
+
+                <div class="permission-item">
+                    <div class="permission-icon">
+                        <img src="imgs/file.png" alt="Mídia" style="width: 32px; height: 32px;">
+                    </div>
+                    <div class="permission-content">
+                        <h3>Arquivos de Mídia</h3>
+                        <p>Para enviar fotos e vídeos em conversas e perfis</p>
+                    </div>
+                    <div class="permission-status" id="media-status">Pendente</div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="request-permissions-btn" class="primary-btn">
+                    Conceder Permissões
+                </button>
+                <button id="next-btn" class="primary-btn" style="display: none;">
+                    Próximo
+                </button>
+                <button id="skip-btn" class="secondary-btn">
+                    Pular por enquanto
+                </button>
+            </div>
+
+            <div class="privacy-note">
+                <p>
+                    <small>
+                        Suas permissões são usadas apenas para melhorar sua experiência no app.
+                        Você pode revogar qualquer permissão nas configurações do seu dispositivo.
+                    </small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/permissions.js"></script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    overflow: hidden;
+    user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+h1,h2,a,p{
+    position: absolute;
+}
+
+body {
+    background: #1a73e8;
+    height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
+.texto{
+    top: 5%;
+    position: absolute;
+    color: #fff;
+    text-align: left;
+    left: 10%;
+    font-size: 2em;
+    z-index: 10;
+}
+
+.btn-voltar-topo {
+    position: absolute;
+    top: 5%;
+    right: 4%;
+    background: none;
+    border: none;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 15;
+    transition: opacity 0.3s ease;
+}
+
+
+.btn-voltar-topo:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-voltar-topo:hover {
+    opacity: 0.7;
+}
+
+.btn-voltar-topo img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
+}
+
+#map {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 50vh;
+    border: none;
+    z-index: 5;
+    border-radius: 20px;
+}
+
+
+.container {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 300px;
+    z-index: 10;
+}
+
+.btn-primary {
+    width: 100%;
+    max-width: 280px;
+    background-color: #FFF;
+    color: #01588E;
+    padding: 14px 0;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-size: 19px;
+    position: absolute;
+    top: 100%;
+    margin-left: 4px;
+    margin-top: 14px;
+
+}
+
+.btn-primary:hover {
+    background-color: #1a3ea8;
+    color: white;
+}
+
+/* Responsividade para telas menores */
+@media (max-height: 700px) {
+    .texto {
+        font-size: 1.5em;
+        top: 3%;
+    }
+
+    #map {
+        top: 20%;
+        height: 45vh;
+    }
+
+    .container {
+        top: 75%;
+    }
+
+    .btn-primary {
+        margin-top: 20px;
+    }
+}
+
+/* Markers do usuário no mapa */
+.user-marker {
+    border: none !important;
+    background: transparent !important;
+}
+
+.user-marker div {
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    overflow: hidden;
+    background: #007bff; /* Círculo azul */
+}
+
+/* Modal de confirmação de cancelamento */
+#modalConfirmacao {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 99999 !important;
+    font-family: 'Poppins', Arial, sans-serif !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+#modalConfirmacao > div {
+    background: white !important;
+    padding: 15px !important;
+    border-radius: 15px !important;
+    max-width: 300px !important;
+    width: 100% !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    max-height: 300px !important;
+    min-height: 300px !important;
+    overflow-y: auto !important;
+}
+
+#modalConfirmacao h3 {
+    color: #333 !important;
+    margin-top: 8px !important;
+    margin-bottom: 3px !important;
+    font-weight: 600 !important;
+    font-size: 24px !important;
+    text-align: center !important;
+    width: 100% !important;
+    line-height: 1.2 !important;
+    padding: 0 6px !important;
+    white-space: nowrap !important;
+}
+
+#modalConfirmacao p {
+    color: #666 !important;
+    margin-bottom: 15px !important;
+    line-height: 1.4 !important;
+    font-size: 16px !important;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    padding: 0 6px !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+}
+
+#modalConfirmacao button {
+    padding: 20px 20px !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    font-family: 'Poppins', Arial, sans-serif !important;
+    transition: all 0.3s ease !important;
+    min-width: 115px !important;
+    flex: 1 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+#btnNaoConfirmar {
+    background: #6c757d !important;
+    color: white !important;
+}
+
+#btnNaoConfirmar:hover {
+    background: #5a6268 !important;
+    transform: translateY(-1px) !important;
+}
+
+#btnConfirmarCancelar {
+    background: #dc3545 !important;
+    color: white !important;
+}
+
+#btnConfirmarCancelar:hover {
+    background: #c82333 !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Container fixo para o botão detectar localização */
+#buttonContainer {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Estilização do botão detectar localização dentro do mapa */
+#detectarLocalizacaoBtn {
+    background: #007bff !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    font-family: 'Poppins', Arial, sans-serif !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+    transition: all 0.3s ease !important;
+    outline: none !important;
+    width: 180px !important;
+    display: inline-block !important;
+    text-align: center !important;
+}
+
+#detectarLocalizacaoBtn:hover {
+    background: #0056b3 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4) !important;
+}
+
+#detectarLocalizacaoBtn:active {
+    transform: translateY(0px) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+}
+
+
+
+/* Campos de endereço */
+.endereco-container {
+    position: absolute;
+    top: 78%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 8;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.endereco-titulo {
+    color: #01588E;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Poppins', Arial, sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #9ca3af;
+}
+
+/* Ajustes para responsividade */
+@media (max-height: 700px) {
+    .endereco-container {
+        top: 75%;
+        max-height: 40vh;
+        padding: 15px;
+    }
+
+    .endereco-titulo {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: 15px;
+    }
+}
+
+/* Modal de Endereço em Tela Cheia */
+.modal-overlay.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    box-sizing: border-box;
+}
+
+.modal-content.fullscreen {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-body.scrollable {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animação do spinner */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

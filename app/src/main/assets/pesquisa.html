@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Pesquisa</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/pesquisa.css" />
+  <script defer src="scripts/pesquisa.js"></script>
+</head>
+
+<header class="topbar">
+  <div class="topbar2">
+    <button class="back-btn" onclick="goBack()">
+      <img src="./imgs/voltar_branco.png" alt="Voltar" class="back-icon">
+    </button>
+    <h2 class="titulo">Pesquisa</h2>
+  </div>
+</header>
+
+<!-- Container da Pesquisa -->
+<div class="search-container">
+  <!-- Barra de pesquisa -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Buscar paneleiros..." />
+  </div>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <div class="filter-group">
+      <label>Ordenar por:</label>
+      <select id="sortBy">
+        <option value="distance">Distância</option>
+        <option value="name-asc">Nome (A-Z)</option>
+        <option value="name-desc">Nome (Z-A)</option>
+        <option value="rating">Avaliação</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label>Avaliação mínima:</label>
+      <select id="minRating">
+        <option value="0">Todas</option>
+        <option value="3">3+ estrelas</option>
+        <option value="4">4+ estrelas</option>
+        <option value="4.5">4.5+ estrelas</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Resultados -->
+  <div class="results-container">
+    <div id="resultsList" class="results-list">
+      <!-- Resultados aparecerão aqui -->
+    </div>
+
+    <div id="noResults" class="no-results" style="display: none;">
+      <p>Nenhum paneleiro encontrado</p>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-navigation">
+  <a href="pedidos.html" class="nav-item" id="btnServicos">
+    <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+    <span class="nav-label">Serviços</span>
+  </a>
+  <a href="home.html" class="nav-item active" id="btnHome">
+    <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+    <span class="nav-label">Home</span>
+  </a>
+  <a href="mensagens.html" class="nav-item" id="btnMensagens">
+    <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+    <span class="nav-label">Mensagens</span>
+  </a>
+  <a href="perfil.html" class="nav-item" id="btnPerfil">
+    <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+    <span class="nav-label">Perfil</span>
+  </a>
+</nav>
+
+</html>

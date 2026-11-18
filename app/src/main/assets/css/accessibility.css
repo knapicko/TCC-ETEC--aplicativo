@@ -1,0 +1,142 @@
+/* Sistema de Acessibilidade Global */
+
+/* ===========================================
+   FILTROS DE DALTONISMO
+   =========================================== */
+
+/* Protanopia (cegueira ao vermelho) */
+.daltonism-protanopia {
+  filter: url(#protanopia-filter);
+}
+
+/* Deuteranopia (cegueira ao verde) */
+.daltonism-deuteranopia {
+  filter: url(#deuteranopia-filter);
+}
+
+/* Tritanopia (cegueira ao azul) */
+.daltonism-tritanopia {
+  filter: url(#tritanopia-filter);
+}
+
+/* Fallback para navegadores que não suportam SVG filters */
+@supports not (filter: url(#test)) {
+  .daltonism-protanopia {
+    filter: sepia(0.4) saturate(1.2) hue-rotate(0deg) brightness(1.1);
+  }
+
+  .daltonism-deuteranopia {
+    filter: sepia(0.3) saturate(1.1) hue-rotate(10deg) brightness(1.05);
+  }
+
+  .daltonism-tritanopia {
+    filter: sepia(0.2) saturate(1.3) hue-rotate(-20deg) brightness(0.95);
+  }
+}
+
+
+
+
+
+
+
+/* ===========================================
+   MODO DE FONTE EM NEGRITO
+   =========================================== */
+
+.font-bold-mode * {
+  font-weight: bold !important;
+}
+
+/* Aplicar cor preta em textos principais */
+.font-bold-mode p, .font-bold-mode span:not(.star):not(.empty-state-icon),
+.font-bold-mode div:not(.empty-state),
+.font-bold-mode h1, .font-bold-mode h2, .font-bold-mode h3, .font-bold-mode h4, .font-bold-mode h5, .font-bold-mode h6,
+.font-bold-mode label, .font-bold-mode a:not(.nav-item),
+.font-bold-mode input, .font-bold-mode textarea, .font-bold-mode select,
+.font-bold-mode .nav-label, .font-bold-mode .header-title,
+.font-bold-mode .modal-title, .font-bold-mode .form-label,
+.font-bold-mode .setting-item span, .font-bold-mode .field-container span,
+.font-bold-mode .terms-content p, .font-bold-mode .terms-content li,
+.font-bold-mode .empty-state-title, .font-bold-mode .empty-state-message {
+  color: #000 !important;
+}
+
+/* Forçar cor preta em textos que podem estar brancos */
+.font-bold-mode .header,
+.font-bold-mode .header-title,
+.font-bold-mode .modal-header,
+.font-bold-mode .modal-title,
+.font-bold-mode .terms-container,
+.font-bold-mode .security-container,
+.font-bold-mode .terms-content,
+.font-bold-mode .terms-section h1,
+.font-bold-mode .terms-section h2,
+.font-bold-mode .terms-section p {
+  color: #000 !important;
+}
+
+/* Headers específicos que podem ter cores brancas */
+.font-bold-mode .header {
+  background: #1a73e8 !important;
+  color: #000 !important;
+}
+
+.font-bold-mode .header-title {
+  color: #000 !important;
+}
+
+/* Preservar cores específicas de elementos decorativos */
+.font-bold-mode .star {
+  color: inherit !important;
+}
+
+.font-bold-mode .star.filled {
+  color: #ffb800 !important;
+}
+
+.font-bold-mode .star:not(.filled) {
+  color: #ddd !important;
+}
+
+.font-bold-mode .empty-state-icon,
+.font-bold-mode .tab-button,
+.font-bold-mode .nav-item {
+  color: inherit !important;
+}
+
+/* Manter cores específicas dos botões */
+.font-bold-mode .btn-primary,
+.font-bold-mode .btn-secondary,
+.font-bold-mode .save-btn,
+.font-bold-mode .cancel-btn,
+.font-bold-mode .edit-btn,
+.font-bold-mode .delete-btn {
+  color: inherit !important;
+}
+
+/* Preservar tamanho original da bottom navigation */
+.font-bold-mode .bottom-navigation,
+.font-bold-mode .bottom-navigation *,
+.font-bold-mode .nav-item,
+.font-bold-mode .nav-label,
+.font-bold-mode .nav-icon {
+  font-size: inherit !important;
+}
+
+/* Corrigir tamanho da caixa de estado vazio */
+.font-bold-mode .empty-state-icon {
+  font-size: 3rem !important;
+  line-height: 1 !important;
+}
+
+
+
+/* ===========================================
+   FOCO PARA NAVEGAÇÃO POR TECLADO
+   =========================================== */
+
+.font-bold-mode *:focus {
+  outline: 2px solid #1a73e8 !important;
+  outline-offset: 1px !important;
+}

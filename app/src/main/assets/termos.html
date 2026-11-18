@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Termos de Uso e Política de Privacidade</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/termos.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+  <script defer src="scripts/termos.js"></script>
+  <script defer src="scripts/accessibility.js"></script>
+</head>
+
+<body>
+  <!-- Filtros SVG para daltonismo -->
+  <svg class="daltonism-svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+      <!-- Protanopia (cegueira ao vermelho) -->
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0,
+          0.558, 0.442, 0, 0, 0,
+          0, 0.242, 0.758, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Deuteranopia (cegueira ao verde) -->
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.8, 0.2, 0, 0, 0,
+          0.258, 0.742, 0, 0, 0,
+          0, 0.142, 0.858, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Tritanopia (cegueira ao azul) -->
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0,
+          0, 0.433, 0.567, 0, 0,
+          0, 0.475, 0.525, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+    </defs>
+  </svg>
+
+<header class="header">
+    <button class="back-btn" onclick="goBack()">
+      <img src="./imgs/voltar_branco.png" alt="Voltar" class="back-icon">
+    </button>
+    <h1 class="header-title">Termos de Uso</h1>
+</header>
+
+<!-- Container dos Termos -->
+<div class="terms-container">
+  <div class="terms-section">
+    <h1>Termos de Uso – Conserta Já</h1>
+    <p class="last-updated">Última atualização: outubro de 2025</p>
+
+    <div class="terms-content">
+      <p>Bem-vindo(a) ao Conserta Já! Somos uma plataforma que conecta paneleiros, clientes e estabelecimentos food service para facilitar o agendamento e a execução de serviços de conserto de panelas e utensílios domésticos. Ao utilizar o aplicativo Conserta Já, o usuário declara que leu, compreendeu e concorda integralmente com os presentes Termos de Uso e com a Política de Privacidade, conforme previsto na Lei nº 13.709/2018 (LGPD).</p>
+
+      <h2>1. Definições</h2>
+      <ul>
+        <li><strong>Usuário:</strong> qualquer pessoa física ou jurídica que utilize o aplicativo, seja como cliente, food service ou paneleiro.</li>
+        <li><strong>Paneleiro:</strong> profissional autônomo que oferece serviços de conserto de panelas e utensílios através do aplicativo.</li>
+        <li><strong>Cliente:</strong> pessoa física ou jurídica que solicita os serviços disponíveis na plataforma.</li>
+        <li><strong>Plataforma:</strong> o aplicativo e o site Conserta Já, incluindo servidores, APIs, banco de dados e integrações.</li>
+        <li><strong>Conta:</strong> perfil pessoal criado pelo usuário, autenticado por meio do Firebase Auth.</li>
+      </ul>
+
+      <h2>2. Cadastro e Acesso</h2>
+      <ul>
+        <li>Para utilizar o Conserta Já, o usuário deve criar uma conta, escolhendo o tipo de perfil: Cliente, Food Service ou Paneleiro.</li>
+        <li>O cadastro pode ser feito via login com Google, e-mail e senha, ou número de telefone com verificação via SMS.</li>
+        <li>Os dados fornecidos devem ser verdadeiros, atualizados e completos. Informações incorretas podem resultar em bloqueio da conta.</li>
+        <li>A autenticação e o armazenamento de dados são realizados de forma segura pelo Firebase Auth e Realtime Database.</li>
+        <li>O cadastro de paneleiros requer CPF ou CNPJ válidos, e o de food services requer CNPJ do estabelecimento.</li>
+      </ul>
+
+      <h2>3. Uso da Plataforma</h2>
+      <ul>
+        <li>O Conserta Já deve ser utilizado apenas para fins legais e compatíveis com o propósito do aplicativo.</li>
+        <li>É proibido: inserir informações falsas, usar linguagem ofensiva, divulgar dados pessoais sensíveis, ou enviar conteúdo ilegal ou difamatório.</li>
+        <li>A equipe de moderação pode revisar, suspender ou remover conteúdos (mensagens, fotos, avaliações) que violem estes Termos.</li>
+        <li>A plataforma se reserva o direito de suspender ou encerrar contas em caso de fraude, mau uso ou descumprimento das políticas.</li>
+      </ul>
+
+      <h2>4. Geolocalização e Endereço</h2>
+      <ul>
+        <li>O aplicativo utiliza geolocalização para exibir paneleiros próximos e calcular distâncias dentro do estado de São Paulo.</li>
+        <li>O usuário pode inserir manualmente o CEP por meio da integração com as APIs ViaCep e Nominatim.</li>
+        <li>O uso da localização é temporário e restrito à exibição e funcionamento dos serviços de busca e agendamento.</li>
+      </ul>
+
+      <h2>5. Sistema de Mensagens e Comunicação</h2>
+      <ul>
+        <li>O chat interno permite a comunicação direta entre cliente e paneleiro para combinar detalhes do serviço.</li>
+        <li>É proibido compartilhar informações pessoais sensíveis, enviar spam ou mensagens com conteúdo impróprio.</li>
+        <li>A equipe de moderação pode revisar mensagens em caso de denúncia para garantir a segurança dos usuários.</li>
+      </ul>
+
+      <h2>6. Pedidos, Pagamentos e Cancelamentos</h2>
+      <ul>
+        <li>O cliente pode solicitar um serviço descrevendo o problema e, opcionalmente, anexando uma imagem.</li>
+        <li>O paneleiro será notificado e poderá aceitar, recusar ou negociar o pedido.</li>
+        <li>O pagamento pode ser realizado via Pix, boleto, cartão de crédito, ou presencialmente no momento da entrega.</li>
+        <li>Em pagamentos digitais, o valor será liberado ao paneleiro somente após a confirmação do cliente de que o serviço foi concluído.</li>
+        <li>Cancelamentos feitos antes do início do serviço geram reembolso integral; após o início, o reembolso será proporcional ao estágio do serviço.</li>
+        <li>Todos os eventos (solicitação, agendamento, confirmação, pagamento, cancelamento e avaliação) são registrados no histórico do usuário.</li>
+      </ul>
+
+      <h2>7. Avaliações e Conteúdo Gerado pelo Usuário</h2>
+      <ul>
+        <li>Clientes podem avaliar paneleiros após a conclusão do serviço, com notas de 1 a 5 estrelas e comentários opcionais.</li>
+        <li>Cada serviço pode receber apenas uma avaliação por cliente.</li>
+        <li>Avaliações com conteúdo ofensivo, difamatório ou falso poderão ser removidas pela moderação.</li>
+      </ul>
+
+      <h2>8. Responsabilidades</h2>
+      <ul>
+        <li>O Conserta Já atua apenas como intermediador tecnológico entre clientes e paneleiros.</li>
+        <li>A plataforma não se responsabiliza pela execução, qualidade, prazos ou valores negociados entre as partes.</li>
+        <li>A responsabilidade pelo serviço, sua realização e eventuais prejuízos é exclusiva de paneleiros e clientes.</li>
+        <li>O usuário é responsável pelo uso adequado da plataforma e pela veracidade das informações fornecidas.</li>
+      </ul>
+
+      <h2>9. Privacidade e Segurança de Dados</h2>
+      <ul>
+        <li>Os dados pessoais coletados (nome, e-mail, telefone, CPF/CNPJ, CEP e localização) são utilizados apenas para o funcionamento da plataforma.</li>
+        <li>O armazenamento e o processamento seguem os princípios da LGPD, garantindo segurança e confidencialidade.</li>
+        <li>O usuário pode solicitar a exclusão de sua conta e dados pessoais a qualquer momento pelo canal de suporte.</li>
+        <li>Os dados poderão ser anonimizados e utilizados para fins estatísticos e de melhoria do serviço.</li>
+      </ul>
+
+      <h2>10. Suporte e Comunicação</h2>
+      <ul>
+        <li>O Conserta Já oferece suporte técnico por meio da seção FAQ e do e-mail de atendimento (suporte@consertaja.app).</li>
+        <li>Mensagens de suporte são respondidas em até 5 dias úteis.</li>
+        <li>A plataforma pode enviar notificações relacionadas a pedidos, atualizações e comunicações de segurança.</li>
+      </ul>
+
+      <h2>11. Suspensão e Encerramento de Conta</h2>
+      <ul>
+        <li>A conta do usuário poderá ser suspensa em caso de fraude, descumprimento destes Termos, ou ordem judicial.</li>
+        <li>O usuário pode encerrar sua conta a qualquer momento pelo aplicativo, mediante confirmação de identidade.</li>
+      </ul>
+
+      <h2>12. Alterações dos Termos</h2>
+      <p>O Conserta Já poderá atualizar estes Termos de Uso periodicamente. Mudanças significativas serão comunicadas pelo aplicativo. O uso contínuo após as alterações implica na aceitação dos novos termos.</p>
+
+      <h2>13. Foro e Legislação Aplicável</h2>
+      <p>Estes Termos são regidos pela legislação brasileira, especialmente pela LGPD (Lei nº 13.709/2018) e pelo Código de Defesa do Consumidor. Fica eleito o foro da Comarca de São Paulo – SP para dirimir quaisquer controvérsias.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-navigation">
+  <a href="pedidos.html" class="nav-item" id="btnServicos">
+    <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+    <span class="nav-label">Serviços</span>
+  </a>
+  <a href="home.html" class="nav-item" id="btnHome">
+    <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+    <span class="nav-label">Home</span>
+  </a>
+  <a href="mensagens.html" class="nav-item" id="btnMensagens">
+    <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+    <span class="nav-label">Mensagens</span>
+  </a>
+  <a href="perfil.html" class="nav-item active" id="btnPerfil">
+    <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+    <span class="nav-label">Perfil</span>
+  </a>
+</nav>
+
+</html>

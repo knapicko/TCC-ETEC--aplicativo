@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <title>Tela Inicial</title>
+  <link rel="stylesheet" href="css/index.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <div class="primeira">
+    <img src="./imgs/rectangle.png" alt="" class="rectangle">
+  </div>
+
+  <h1 class="login">Entre na sua <br>conta</h1>
+
+  <form action="" method="post">
+    <div class="input-gmail">
+      <label for="emailInput">Email ou Telefone</label>
+      <input type="text" id="emailInput" placeholder="Email ou Telefone">
+    </div>
+
+    <div class="input-senha">
+      <label for="senhaInput">Senha</label>
+      <input type="password" id="senhaInput" placeholder="Senha">
+      <button type="button" id="btnToggleSenha" class="toggle-password">
+        <img src="./imgs/visivel.png" alt="Mostrar senha" id="eyeIcon">
+      </button>
+    </div>
+
+    <div class="container">
+      <button id="btnLogin" class="btn-primary">Entrar</button>
+    </div>
+
+    <a class="senha" href="#">Esqueceu sua senha?</a>
+    <a class="leg1">Ou continue com</a>
+
+    <div class="opcoes">
+      <img src="./imgs/gmail.png" id="btnGoogle">
+
+
+      <a class="leg2">Não possui uma conta?</a>
+      <a class="criar" href="criar_conta.html">Crie uma</a>
+
+    </div>
+
+  </form>
+
+
+
+
+
+
+
+
+  <!-- Modal de Termos de Uso -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeTermsModal()">&times;</span>
+      <h3>Termos e Políticas de Uso</h3>
+
+      <div class="terms-scroll-area">
+        <div class="terms-text-area">
+          <div class="terms-section">
+            Ao utilizar o aplicativo Conserta Já, o usuário
+            declara que leu, compreendeu e concorda integralmente com os presentes Termos de Uso e
+            com a Política de Privacidade, conforme previsto na Lei nº 13.709/2018 (LGPD).
+
+            1. Definições
+            • Usuário: qualquer pessoa física ou jurídica que utilize o aplicativo, seja como cliente, food
+            service ou paneleiro.
+            • Paneleiro: profissional autônomo que oferece serviços de conserto de panelas e utensílios
+            através do aplicativo.
+            • Cliente: pessoa física ou jurídica que solicita os serviços disponíveis na plataforma.
+            • Plataforma: o aplicativo e o site Conserta Já, incluindo servidores, APIs, banco de dados e
+            integrações.
+            • Conta: perfil pessoal criado pelo usuário, autenticado por meio do Firebase Auth.
+
+            2. Cadastro e Acesso
+            • Para utilizar o Conserta Já, o usuário deve criar uma conta, escolhendo o tipo de perfil:
+            Cliente, Food Service ou Paneleiro.
+            • O cadastro pode ser feito via login com Google, e-mail e senha, ou número de telefone com
+            verificação via SMS.
+            • Os dados fornecidos devem ser verdadeiros, atualizados e completos. Informações
+            incorretas podem resultar em bloqueio da conta.
+            • A autenticação e o armazenamento de dados são realizados de forma segura pelo Firebase
+            Auth e Realtime Database.
+            • O cadastro de paneleiros requer CPF ou CNPJ válidos, e o de food services requer CNPJ do
+            estabelecimento.
+
+            3. Uso da Plataforma
+            • O Conserta Já deve ser utilizado apenas para fins legais e compatíveis com o propósito do
+            aplicativo.
+            • É proibido: inserir informações falsas, usar linguagem ofensiva, divulgar dados pessoais
+            sensíveis, ou enviar conteúdo ilegal ou difamatório.
+            • A equipe de moderação pode revisar, suspender ou remover conteúdos (mensagens, fotos,
+            avaliações) que violem estes Termos.
+            • A plataforma se reserva o direito de suspender ou encerrar contas em caso de fraude, mau
+            uso ou descumprimento das políticas.
+
+            4. Geolocalização e Endereço
+            • O aplicativo utiliza geolocalização para exibir paneleiros próximos e calcular distâncias
+            dentro do estado de São Paulo.
+            • O usuário pode inserir manualmente o CEP por meio da integração com as APIs ViaCep e
+            Nominatim.
+            • O uso da localização é temporário e restrito à exibição e funcionamento dos serviços de
+            busca e agendamento.
+
+            5. Sistema de Mensagens e Comunicação
+            • O chat interno permite a comunicação direta entre cliente e paneleiro para combinar
+            detalhes do serviço.
+            • É proibido compartilhar informações pessoais sensíveis, enviar spam ou mensagens com
+            conteúdo impróprio.
+            • A equipe de moderação pode revisar mensagens em caso de denúncia para garantir a
+            segurança dos usuários.
+
+            6. Pedidos, Pagamentos e Cancelamentos
+            • O cliente pode solicitar um serviço descrevendo o problema e, opcionalmente, anexando
+            uma imagem.
+            • O paneleiro será notificado e poderá aceitar, recusar ou negociar o pedido.
+            • O pagamento pode ser realizado via Pix, boleto, cartão de crédito, ou presencialmente no
+            momento da entrega.
+            • Em pagamentos digitais, o valor será liberado ao paneleiro somente após a confirmação do
+            cliente de que o serviço foi concluído.
+            • Cancelamentos feitos antes do início do serviço geram reembolso integral; após o início, o
+            reembolso será proporcional ao estágio do serviço.
+            • Todos os eventos (solicitação, agendamento, confirmação, pagamento, cancelamento e
+            avaliação) são registrados no histórico do usuário.
+
+            7. Avaliações e Conteúdo Gerado pelo Usuário
+            • Clientes podem avaliar paneleiros após a conclusão do serviço, com notas de 1 a 5 estrelas
+            e comentários opcionais.
+            • Cada serviço pode receber apenas uma avaliação por cliente.
+            • Avaliações com conteúdo ofensivo, difamatório ou falso poderão ser removidas pela
+            moderação.
+
+            8. Responsabilidades
+            • O Conserta Já atua apenas como intermediador tecnológico entre clientes e paneleiros.
+            • A plataforma não se responsabiliza pela execução, qualidade, prazos ou valores
+            negociados entre as partes.
+            • A responsabilidade pelo serviço, sua realização e eventuais prejuízos é exclusiva de
+            paneleiros e clientes.
+            • O usuário é responsável pelo uso adequado da plataforma e pela veracidade das
+            informações fornecidas.
+
+            9. Privacidade e Segurança de Dados
+            • Os dados pessoais coletados (nome, e-mail, telefone, CPF/CNPJ, CEP e localização) são
+            utilizados apenas para o funcionamento da plataforma.
+            • O armazenamento e o processamento seguem os princípios da LGPD, garantindo
+            segurança e confidencialidade.
+            • O usuário pode solicitar a exclusão de sua conta e dados pessoais a qualquer momento
+            pelo canal de suporte.
+            • Os dados poderão ser anonimizados e utilizados para fins estatísticos e de melhoria do
+            serviço.
+
+            10. Suporte e Comunicação
+            • O Conserta Já oferece suporte técnico por meio da seção FAQ e do e-mail de atendimento
+            (suporte@consertaja.app).
+            • Mensagens de suporte são respondidas em até 5 dias úteis.
+            • A plataforma pode enviar notificações relacionadas a pedidos, atualizações e
+            comunicações de segurança.
+
+            11. Suspensão e Encerramento de Conta
+            • A conta do usuário poderá ser suspensa em caso de fraude, descumprimento destes
+            Termos, ou ordem judicial.
+            • O usuário pode encerrar sua conta a qualquer momento pelo aplicativo, mediante
+            confirmação de identidade.
+
+            12. Alterações dos Termos
+            O Conserta Já poderá atualizar estes Termos de Uso periodicamente. Mudanças
+            significativas serão comunicadas pelo aplicativo. O uso contínuo após as alterações implica
+            na aceitação dos novos termos.
+
+            13. Foro e Legislação Aplicável
+            Estes Termos são regidos pela legislação brasileira, especialmente pela LGPD (Lei nº
+            13.709/2018) e pelo Código de Defesa do Consumidor. Fica eleito o foro da Comarca de São
+            Paulo – SP para dirimir quaisquer controvérsias.
+
+            Política de Privacidade
+
+            Esta Política de Privacidade descreve como o Conserta Já coleta, utiliza, armazena e protege
+            as informações pessoais dos usuários. Nos comprometemos a garantir a privacidade e a
+            segurança de todos os dados fornecidos, conforme a Lei Geral de Proteção de Dados (LGPD).
+
+            1. Dados Coletados
+            • Informações de cadastro: nome, e-mail, telefone, CPF/CNPJ, tipo de perfil e CEP.
+            • Informações de uso: localização aproximada, histórico de serviços e comunicações dentro
+            do app.
+            • Informações técnicas: endereço IP, dispositivo e sistema operacional utilizado.
+
+            2. Finalidade da Coleta
+            • Permitir o uso das funcionalidades da plataforma (cadastro, login, pedidos e avaliações).
+            • Aprimorar a experiência do usuário e a qualidade dos serviços oferecidos.
+            • Garantir segurança, integridade e prevenção de fraudes.
+
+            3. Compartilhamento de Dados
+            • Os dados pessoais não serão vendidos nem compartilhados com terceiros sem
+            consentimento.
+            • Poderão ser compartilhados apenas com parceiros tecnológicos (como Firebase e APIs de
+            geolocalização) para funcionamento do app.
+
+            4. Armazenamento e Segurança
+            • Os dados são armazenados em servidores seguros, com criptografia e controle de acesso.
+            • Medidas técnicas e administrativas são aplicadas para evitar vazamentos e acessos não
+            autorizados.
+
+            5. Direitos do Usuário
+            • Confirmar a existência de tratamento de dados.
+            • Solicitar acesso, correção, portabilidade ou exclusão de seus dados pessoais.
+            • Revogar o consentimento a qualquer momento.
+
+            6. Retenção e Exclusão de Dados
+            • Os dados serão mantidos enquanto a conta estiver ativa.
+            • Após o encerramento, poderão ser mantidos de forma anonimizada para fins legais e
+            estatísticos.
+
+            7. Contato e Dúvidas
+            Em caso de dúvidas, entre em contato com nosso Encarregado de Dados (DPO) pelo e-mail
+            suporte.consertaja@gmail.com
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="terms-checks">
+        <div class="checkbox-container">
+          <input type="checkbox" id="termsCheck" name="termsCheck">
+          <label for="termsCheck">Li e aceito os Termos de Uso</label>
+        </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="privacyCheck" name="privacyCheck">
+          <label for="privacyCheck">Li e aceito a Política de Privacidade</label>
+        </div>
+      </div>
+
+      <div class="terms-actions">
+        <button class="btn-primary" onclick="validateAndAcceptTerms()">Aceitar</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="scripts/index.js"></script>
+</body>
+
+</html>

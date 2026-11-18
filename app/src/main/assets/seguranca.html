@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Segurança</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/seguranca.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+  <script defer src="scripts/utils.js"></script>
+  <script defer src="scripts/seguranca.js"></script>
+  <script defer src="scripts/accessibility.js"></script>
+</head>
+
+<header class="header">
+    <button class="back-btn" onclick="goBack()">
+      <img src="./imgs/voltar_branco.png" alt="Voltar" class="back-icon">
+    </button>
+    <h1 class="header-title">Segurança</h1>
+</header>
+
+<!-- Container da Segurança -->
+<div class="security-container">
+  <div class="security-section">
+    <h3>Informações de Segurança</h3>
+
+    <!-- Email -->
+    <div class="info-item">
+      <div class="field-container">
+        <label>Email:</label>
+        <span id="userEmail">-</span>
+        <button class="edit-btn" id="editEmailBtn" onclick="editField('email')">Editar</button>
+      </div>
+      <div class="edit-container" id="emailEdit" style="display: none;">
+        <input type="email" id="emailInput" placeholder="Digite seu email">
+        <button class="save-btn" onclick="saveField('email')">Salvar</button>
+        <button class="cancel-btn" onclick="cancelEdit('email')">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- Telefone -->
+    <div class="info-item">
+      <div class="field-container">
+        <label>Telefone:</label>
+        <span id="userPhone">-</span>
+        <button class="edit-btn" id="editPhoneBtn" onclick="editField('phone')">Editar</button>
+      </div>
+      <div class="edit-container" id="phoneEdit" style="display: none;">
+        <input type="tel" id="phoneInput" placeholder="Digite seu telefone">
+        <button class="save-btn" onclick="saveField('phone')">Salvar</button>
+        <button class="cancel-btn" onclick="cancelEdit('phone')">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- Alterar Senha -->
+    <div class="info-item">
+      <div class="field-container">
+        <label>Senha:</label>
+        <span>********</span>
+        <button class="edit-btn" onclick="changePassword()">Alterar Senha</button>
+      </div>
+    </div>
+
+    <!-- Excluir Conta -->
+    <div class="info-item">
+      <div class="field-container">
+        <label>Excluir Conta:</label>
+        <span>Atenção: Esta ação é irreversível</span>
+        <button class="delete-account-btn" onclick="showDeleteModal()">Excluir Conta</button>
+      </div>
+    </div>
+
+    <!-- Modal para alterar senha -->
+    <div id="passwordModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" onclick="closePasswordModal()">&times;</span>
+        <h3>Alterar Senha</h3>
+        <form id="passwordForm">
+          <div class="input-group">
+            <label>Senha Atual:</label>
+            <input type="password" id="currentPassword" placeholder="Digite sua senha atual" required>
+          </div>
+          <div class="input-group">
+            <label>Nova Senha:</label>
+            <input type="password" id="newPassword" placeholder="Digite sua nova senha" required>
+          </div>
+          <div class="input-group">
+            <label>Confirmar Nova Senha:</label>
+            <input type="password" id="confirmPassword" placeholder="Confirme sua nova senha" required>
+          </div>
+          <button type="submit">Alterar Senha</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal para excluir conta -->
+    <div id="deleteModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeDeleteModal()">&times;</span>
+        <h3>Excluir Conta</h3>
+        <p>Esta ação é irreversível. Todos os seus dados serão perdidos.</p>
+        <div class="input-group">
+          <label>Digite "EXCLUIR" para confirmar:</label>
+          <input type="text" id="deleteConfirmation" placeholder="Digite EXCLUIR" required>
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button class="cancel-btn" onclick="closeDeleteModal()">Cancelar</button>
+          <button class="delete-confirm-btn" onclick="handleDeleteAccount()">Excluir Conta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-navigation">
+  <a href="pedidos.html" class="nav-item" id="btnServicos">
+    <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+    <span class="nav-label">Serviços</span>
+  </a>
+  <a href="home.html" class="nav-item" id="btnHome">
+    <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+    <span class="nav-label">Home</span>
+  </a>
+  <a href="mensagens.html" class="nav-item" id="btnMensagens">
+    <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+    <span class="nav-label">Mensagens</span>
+  </a>
+  <a href="perfil.html" class="nav-item active" id="btnPerfil">
+    <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+    <span class="nav-label">Perfil</span>
+  </a>
+</nav>
+
+
+</body>
+</html>

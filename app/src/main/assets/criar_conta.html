@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Criar Conta</title>
+  <link rel="stylesheet" href="css/criar_conta.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+  <div class="primeira">
+    <img src="./imgs/rectangle.png" alt="" class="rectangle">
+  </div>
+
+  <h1 class="login">Crie sua conta</h1>
+
+  <form action="" method="post">
+    <div class="input-nome">
+      <label for="nomeInput">Nome Completo</label>
+      <input type="text" id="nomeInput" placeholder="Nome Completo">
+    </div>
+
+    <div class="input-gmail">
+      <label for="emailInput">Email ou Telefone</label>
+      <input type="text" id="emailInput" placeholder="Email ou Telefone">
+    </div>
+
+    <div class="input-senha">
+      <label for="senhaInput">Senha</label>
+      <input type="password" id="senhaInput" placeholder="Senha">
+      <button type="button" id="btnToggleSenha" class="toggle-password">
+        <img src="./imgs/visivel.png" alt="Mostrar senha" id="eyeIcon">
+      </button>
+    </div>
+
+    <div class="input-date">
+      <label for="dateInput">Data de Nascimento</label>
+      <input type="date" id="dateInput">
+    </div>
+
+    <div class="container">
+      <button id="btnLogin" class="btn-entrar" type="button">Cadastrar</button>
+
+      <a class="leg2" href="index.html">Já possui uma conta? Entre</a>
+
+    </div>
+
+
+
+  </form>
+
+
+
+
+  <!-- Modal de Termos de Uso -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeTermsModal()">&times;</span>
+      <h3>Termos e Políticas de Uso</h3>
+
+      <div class="terms-scroll-area">
+        <div class="terms-text-area">
+          <div class="terms-section">
+            <h4>Termos de Uso - Conserta Já</h4>
+            <p><strong>Última atualização: outubro de 2025</strong></p>
+
+            <p>Bem-vindo(a) ao Conserta Já! Somos uma plataforma que conecta paneleiros, clientes e estabelecimentos
+              food service para facilitar o agendamento e a execução de serviços de conserto de panelas e utensílios
+              domésticos. Ao utilizar o aplicativo Conserta Já, o usuário declara que leu, compreendeu e concorda
+              integralmente com os presentes Termos de Uso e com a Política de Privacidade, conforme previsto na Lei nº
+              13.709/2018 (LGPD).</p>
+
+            <p><strong>1. Definições</strong></p>
+            <ul>
+              <li><strong>Usuário:</strong> qualquer pessoa física ou jurídica que utilize o aplicativo, seja como
+                cliente, food service ou paneleiro.</li>
+              <li><strong>Paneleiro:</strong> profissional autônomo que oferece serviços de conserto de panelas e
+                utensílios através do aplicativo.</li>
+              <li><strong>Cliente:</strong> pessoa física ou jurídica que solicita os serviços disponíveis na
+                plataforma.</li>
+              <li><strong>Plataforma:</strong> o aplicativo e o site Conserta Já, incluindo servidores, APIs, banco de
+                dados e integrações.</li>
+              <li><strong>Conta:</strong> perfil pessoal criado pelo usuário, autenticado por meio do Firebase Auth.
+              </li>
+            </ul>
+
+            <p><strong>2. Cadastro e Acesso</strong></p>
+            <ul>
+              <li>Para utilizar o Conserta Já, o usuário deve criar uma conta, escolhendo o tipo de perfil: Cliente,
+                Food Service ou Paneleiro.</li>
+              <li>O cadastro pode ser feito via login com Google, e-mail e senha, ou número de telefone com verificação
+                via SMS.</li>
+              <li>Os dados fornecidos devem ser verdadeiros, atualizados e completos. Informações incorretas podem
+                resultar em bloqueio da conta.</li>
+              <li>A autenticação e o armazenamento de dados são realizados de forma segura pelo Firebase Auth e Realtime
+                Database.</li>
+              <li>O cadastro de paneleiros requer CPF ou CNPJ válidos, e o de food services requer CNPJ do
+                estabelecimento.</li>
+            </ul>
+
+            <p><strong>3. Uso da Plataforma</strong></p>
+            <ul>
+              <li>O Conserta Já deve ser utilizado apenas para fins legais e compatíveis com o propósito do aplicativo.
+              </li>
+              <li>É proibido: inserir informações falsas, usar linguagem ofensiva, divulgar dados pessoais sensíveis, ou
+                enviar conteúdo ilegal ou difamatório.</li>
+              <li>A equipe de moderação pode revisar, suspender ou remover conteúdos (mensagens, fotos, avaliações) que
+                violem estes Termos.</li>
+              <li>A plataforma se reserva o direito de suspender ou encerrar contas em caso de fraude, mau uso ou
+                descumprimento das políticas.</li>
+            </ul>
+
+            <p><strong>4. Responsabilidades</strong></p>
+            <ul>
+              <li>O Conserta Já atua apenas como intermediador tecnológico entre clientes e paneleiros.</li>
+              <li>A plataforma não se responsabiliza pela execução, qualidade, prazos ou valores negociados entre as
+                partes.</li>
+              <li>A responsabilidade pelo serviço, sua realização e eventuais prejuízos é exclusiva de paneleiros e
+                clientes.</li>
+              <li>O usuário é responsável pelo uso adequado da plataforma e pela veracidade das informações fornecidas.
+              </li>
+            </ul>
+
+            <p><strong>5. Privacidade e Segurança de Dados</strong></p>
+            <ul>
+              <li>Os dados pessoais coletados (nome, e-mail, telefone, CPF/CNPJ, CEP e localização) são utilizados
+                apenas para o funcionamento da plataforma.</li>
+              <li>O armazenamento e o processamento seguem os princípios da LGPD, garantindo segurança e
+                confidencialidade.</li>
+              <li>O usuário pode solicitar a exclusão de sua conta e dados pessoais a qualquer momento pelo canal de
+                suporte.</li>
+              <li>Os dados poderão ser anonimizados e utilizados para fins estatísticos e de melhoria do serviço.</li>
+            </ul>
+
+            <p><strong>6. Alterações dos Termos</strong></p>
+            <p>O Conserta Já poderá atualizar estes Termos de Uso periodicamente. Mudanças significativas serão
+              comunicadas pelo aplicativo. O uso contínuo após as alterações implica na aceitação dos novos termos.</p>
+
+            <p><strong>7. Foro e Legislação Aplicável</strong></p>
+            <p>Estes Termos são regidos pela legislação brasileira, especialmente pela LGPD (Lei nº 13.709/2018) e pelo
+              Código de Defesa do Consumidor. Fica eleito o foro da Comarca de São Paulo – SP para dirimir quaisquer
+              controvérsias.</p>
+          </div>
+
+          <div class="terms-section">
+            <h4>Política de Privacidade - Conserta Já</h4>
+            <p>Esta Política de Privacidade descreve como o Conserta Já coleta, utiliza, armazena e protege as
+              informações pessoais dos usuários. Nos comprometemos a garantir a privacidade e a segurança de todos os
+              dados fornecidos, conforme a Lei Geral de Proteção de Dados (LGPD).</p>
+
+            <p><strong>1. Dados Coletados</strong></p>
+            <ul>
+              <li>Informações de cadastro: nome, e-mail, telefone, CPF/CNPJ, tipo de perfil e CEP.</li>
+              <li>Informações de uso: localização aproximada, histórico de serviços e comunicações dentro do app.</li>
+              <li>Informações técnicas: endereço IP, dispositivo e sistema operacional utilizado.</li>
+            </ul>
+
+            <p><strong>2. Finalidade da Coleta</strong></p>
+            <ul>
+              <li>Permitir o uso das funcionalidades da plataforma (cadastro, login, pedidos e avaliações).</li>
+              <li>Aprimorar a experiência do usuário e a qualidade dos serviços oferecidos.</li>
+              <li>Garantir segurança, integridade e prevenção de fraudes.</li>
+            </ul>
+
+            <p><strong>3. Compartilhamento de Dados</strong></p>
+            <ul>
+              <li>Os dados pessoais não serão vendidos nem compartilhados com terceiros sem consentimento.</li>
+              <li>Poderão ser compartilhados apenas com parceiros tecnológicos (como Firebase e APIs de geolocalização)
+                para funcionamento do app.</li>
+            </ul>
+
+            <p><strong>4. Armazenamento e Segurança</strong></p>
+            <ul>
+              <li>Os dados são armazenados em servidores seguros, com criptografia e controle de acesso.</li>
+              <li>Medidas técnicas e administrativas são aplicadas para evitar vazamentos e acessos não autorizados.
+              </li>
+            </ul>
+
+            <p><strong>5. Direitos do Usuário</strong></p>
+            <ul>
+              <li>Confirmar a existência de tratamento de dados.</li>
+              <li>Solicitar acesso, correção, portabilidade ou exclusão de seus dados pessoais.</li>
+              <li>Revogar o consentimento a qualquer momento.</li>
+            </ul>
+
+            <p><strong>6. Contato e Dúvidas</strong></p>
+            <p>Em caso de dúvidas, entre em contato com nosso Encarregado de Dados (DPO) pelo e-mail <a
+                href="mailto:suporte.consertaja@gmail.com">suporte.consertaja@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="terms-checks">
+        <div class="checkbox-container">
+          <input type="checkbox" id="termsCheck" name="termsCheck">
+          <label for="termsCheck">Li e aceito os Termos de Uso</label>
+        </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="privacyCheck" name="privacyCheck">
+          <label for="privacyCheck">Li e aceito a Política de Privacidade</label>
+        </div>
+      </div>
+
+      <div class="terms-actions">
+        <button class="btn-primary" onclick="validateAndAcceptTerms()">Aceitar</button>
+      </div>
+
+      <div class="terms-footer">
+        <a href="index.html">Já possui uma conta? Entre</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/criar_conta.js"></script>
+</body>
+
+</html>

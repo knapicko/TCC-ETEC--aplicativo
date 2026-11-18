@@ -75,7 +75,7 @@ Para compilar, modificar e executar o projeto, certifique-se de ter os seguintes
 
 > **Atenção!** Ao compilar e executar o aplicativo localmente em sua máquina, o **Login com Google** e a **Verificação por SMS (Firebase Auth)** podem não funcionar se a chave **SHA-1** da sua máquina não estiver cadastrada no seu projeto do Console Firebase.
 
-> **Dica:** Certifique-se de ter o arquivo `google-services.json` configurado na pasta `/app` do projeto para que a conexão com o Firebase funcione corretamente.
+> **Configuração do Firebase:** Este repositório não inclui configurações de projeto Firebase. Copie `app/src/main/assets/scripts/firebase-config.example.js` para `app/src/main/assets/scripts/firebase-config.js` e preencha os valores da sua aplicação Web Firebase. Para os serviços Firebase nativos do Android, coloque também o `google-services.json` fornecido pelo Console Firebase em `app/`. Esses arquivos locais são ignorados pelo Git.
 
 **Passo a passo:**
 

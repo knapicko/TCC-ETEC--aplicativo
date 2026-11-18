@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Acessibilidade</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/seguranca.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+  <script defer src="scripts/utils.js"></script>
+  <script defer src="scripts/accessibility.js"></script>
+</head>
+
+<body>
+  <!-- Filtros SVG para daltonismo -->
+  <svg class="daltonism-svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+      <!-- Protanopia (cegueira ao vermelho) -->
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0,
+          0.558, 0.442, 0, 0, 0,
+          0, 0.242, 0.758, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Deuteranopia (cegueira ao verde) -->
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.8, 0.2, 0, 0, 0,
+          0.258, 0.742, 0, 0, 0,
+          0, 0.142, 0.858, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Tritanopia (cegueira ao azul) -->
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0,
+          0, 0.433, 0.567, 0, 0,
+          0, 0.475, 0.525, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+    </defs>
+  </svg>
+</head>
+
+<header class="header">
+    <button class="back-btn" onclick="goBack()">
+      <img src="./imgs/voltar_branco.png" alt="Voltar" class="back-icon">
+    </button>
+    <h1 class="header-title">Acessibilidade</h1>
+</header>
+
+<!-- Container da Acessibilidade -->
+<div class="security-container">
+  <div class="security-section">
+    <h3>Configurações de Acessibilidade</h3>
+
+
+
+    <!-- Fontes em Negrito -->
+    <div class="info-item">
+      <div class="field-container">
+        <label>Fontes em Negrito:</label>
+        <span>Melhora a legibilidade do texto</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="font-bold-toggle-main">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Filtro de Daltonismo -->
+    <div class="info-item">
+      <div class="field-container">
+        <label>Filtro de Daltonismo:</label>
+        <span>Ajusta cores para daltonismo</span>
+        <select id="daltonism-filter-main" class="daltonism-select">
+          <option value="none">Nenhum</option>
+          <option value="protanopia">Protanopia (vermelho)</option>
+          <option value="deuteranopia">Deuteranopia (verde)</option>
+          <option value="tritanopia">Tritanopia (azul)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Teste Visual -->
+    <div class="info-item">
+      <div class="field-container">
+        <label>Teste Visual:</label>
+        <span>Veja como ficam os ajustes</span>
+        <button class="edit-btn" onclick="showTestModal()">Testar</button>
+      </div>
+    </div>
+
+    <!-- Reset -->
+    <div class="info-item">
+      <div class="field-container">
+        <label>Redefinir:</label>
+        <span>Volta às configurações padrão</span>
+        <button class="reset-btn" onclick="resetAccessibility()">Redefinir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Teste -->
+<div id="testModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeTestModal()">&times;</span>
+    <h3>Teste de Acessibilidade</h3>
+    <div class="test-content">
+      <p>Este é um exemplo de como o texto aparece com suas configurações atuais.</p>
+      <p><strong>Texto em negrito</strong> para testar a legibilidade.</p>
+      <p>Links aparecem <a href="#" style="color: #1a73e8;">destacados</a> para navegação.</p>
+      <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 4px;">
+        Área com fundo diferente para testar contraste.
+      </div>
+      <button style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin: 5px;">
+        Botão de exemplo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-navigation">
+  <a href="pedidos.html" class="nav-item" id="btnServicos">
+    <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+    <span class="nav-label">Serviços</span>
+  </a>
+  <a href="home.html" class="nav-item" id="btnHome">
+    <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+    <span class="nav-label">Home</span>
+  </a>
+  <a href="mensagens.html" class="nav-item" id="btnMensagens">
+    <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+    <span class="nav-label">Mensagens</span>
+  </a>
+  <a href="perfil.html" class="nav-item active" id="btnPerfil">
+    <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+    <span class="nav-label">Perfil</span>
+  </a>
+</nav>
+
+<script>
+// Função para voltar
+function goBack() {
+  window.history.back();
+}
+
+// Mostrar modal de teste
+function showTestModal() {
+  document.getElementById('testModal').style.display = 'block';
+}
+
+// Fechar modal de teste
+function closeTestModal() {
+  document.getElementById('testModal').style.display = 'none';
+}
+
+// Resetar acessibilidade
+function resetAccessibility() {
+  if (confirm('Tem certeza que deseja redefinir todas as configurações de acessibilidade?')) {
+    if (window.AccessibilitySettings) {
+      window.AccessibilitySettings.reset();
+      updateMainControls();
+      alert('Configurações de acessibilidade redefinidas!');
+    }
+  }
+}
+
+// Atualizar controles principais com as configurações atuais
+function updateMainControls() {
+  if (window.AccessibilitySettings) {
+    const settings = window.AccessibilitySettings.getSettings();
+
+    document.getElementById('font-bold-toggle-main').checked = settings.fontWeight === 'bold';
+    document.getElementById('daltonism-filter-main').value = settings.daltonismFilter;
+  }
+}
+
+// Inicializar controles
+document.addEventListener('DOMContentLoaded', function() {
+  // Aguardar o sistema de acessibilidade carregar
+  setTimeout(updateMainControls, 500);
+
+  // Event listeners para os controles principais
+  document.getElementById('font-bold-toggle-main').addEventListener('change', function(e) {
+    if (window.AccessibilitySettings) {
+      window.AccessibilitySettings.setFontWeight(e.target.checked ? 'bold' : 'normal');
+    }
+  });
+
+  document.getElementById('daltonism-filter-main').addEventListener('change', function(e) {
+    if (window.AccessibilitySettings) {
+      window.AccessibilitySettings.setDaltonismFilter(e.target.value);
+    }
+  });
+});
+</script>
+
+<style>
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-left: 10px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #1a73e8;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+/* Select personalizado */
+.daltonism-select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  background: white;
+  cursor: pointer;
+  min-width: 150px;
+  margin-left: 10px;
+}
+
+.daltonism-select:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+/* Botão reset */
+.reset-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  margin-left: 10px;
+}
+
+.reset-btn:hover {
+  background: #c82333;
+}
+
+/* Modal de teste */
+.test-content {
+  padding: 20px 0;
+}
+
+.test-content p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.test-content a {
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.test-content button {
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.test-content button:hover {
+  opacity: 0.9;
+}
+</style>
+
+</html>

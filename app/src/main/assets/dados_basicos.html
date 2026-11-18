@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Dados Básicos</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/dados_basicos.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+  <script defer src="scripts/dados_basicos.js"></script>
+  <script defer src="scripts/accessibility.js"></script>
+</head>
+
+<body>
+  <!-- Filtros SVG para daltonismo -->
+  <svg class="daltonism-svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+      <!-- Protanopia (cegueira ao vermelho) -->
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0,
+          0.558, 0.442, 0, 0, 0,
+          0, 0.242, 0.758, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Deuteranopia (cegueira ao verde) -->
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.8, 0.2, 0, 0, 0,
+          0.258, 0.742, 0, 0, 0,
+          0, 0.142, 0.858, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Tritanopia (cegueira ao azul) -->
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0,
+          0, 0.433, 0.567, 0, 0,
+          0, 0.475, 0.525, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+    </defs>
+  </svg>
+
+<header class="header">
+    <button class="back-btn" onclick="goBack()">
+      <img src="./imgs/voltar_branco.png" alt="Voltar" class="back-icon">
+    </button>
+    <h1 class="header-title">Dados Básicos</h1>
+</header>
+
+<!-- Container dos Dados Básicos -->
+<div class="data-container">
+  <!-- Foto de Perfil -->
+  <div class="profile-photo-section">
+    <div class="photo-container">
+      <img id="profilePhoto" src="./imgs/perfil.png" alt="Foto de Perfil" class="profile-photo">
+    </div>
+  </div>
+
+  <!-- Informações Pessoais -->
+  <div class="info-section">
+    <h3>Informações Pessoais</h3>
+
+    <!-- Nome -->
+    <div class="info-item editable">
+      <label>Nome:</label>
+      <div class="field-container">
+        <span id="userName">-</span>
+        <button class="edit-btn" id="editNameBtn" onclick="editField('name')">Editar</button>
+      </div>
+      <div class="edit-container" id="nameEdit" style="display: none;">
+        <input type="text" id="nameInput" placeholder="Digite seu nome">
+        <button class="save-btn" onclick="saveField('name')">Salvar</button>
+        <button class="cancel-btn" onclick="cancelEdit('name')">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- Data de Nascimento -->
+    <div class="info-item editable">
+      <label>Data de Nascimento:</label>
+      <div class="field-container">
+        <span id="userBirthDate">-</span>
+        <button class="edit-btn" id="editBirthDateBtn" onclick="editField('birthDate')">Editar</button>
+      </div>
+      <div class="edit-container" id="birthDateEdit" style="display: none;">
+        <input type="date" id="birthDateInput">
+        <button class="save-btn" onclick="saveField('birthDate')">Salvar</button>
+        <button class="cancel-btn" onclick="cancelEdit('birthDate')">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- CPF/CNPJ -->
+    <div class="info-item editable">
+      <label id="cpfCnpjLabel">CPF/CNPJ:</label>
+      <div class="field-container">
+        <span id="userCpfCnpj">-</span>
+        <button class="edit-btn" id="editCpfCnpjBtn" onclick="editField('cpfCnpj')">Editar</button>
+      </div>
+      <div class="edit-container" id="cpfCnpjEdit" style="display: none;">
+        <input type="text" id="cpfCnpjInput" placeholder="Digite seu CPF ou CNPJ" maxlength="18" oninput="formatCpfCnpj(this)">
+        <button class="save-btn" onclick="saveField('cpfCnpj')">Salvar</button>
+        <button class="cancel-btn" onclick="cancelEdit('cpfCnpj')">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- Tipo de usuário (apenas visual) -->
+    <div class="info-item">
+      <label>Tipo de usuário:</label>
+      <span id="userType">-</span>
+    </div>
+
+    <!-- É Food Service? (apenas para clientes) -->
+    <div class="info-item editable" id="foodServiceSection" style="display: none;">
+      <label>É Food Service?</label>
+      <div class="field-container">
+        <input type="checkbox" id="foodServiceCheckbox" onchange="toggleFoodService(this.checked)">
+        <span id="foodServiceStatus">Não</span>
+      </div>
+      <div class="legend">Restaurante, lanchonete, bar, food truck, e etc.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-navigation">
+  <a href="pedidos.html" class="nav-item" id="btnServicos">
+    <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+    <span class="nav-label">Serviços</span>
+  </a>
+  <a href="home.html" class="nav-item" id="btnHome">
+    <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+    <span class="nav-label">Home</span>
+  </a>
+  <a href="mensagens.html" class="nav-item" id="btnMensagens">
+    <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+    <span class="nav-label">Mensagens</span>
+  </a>
+  <a href="perfil.html" class="nav-item active" id="btnPerfil">
+    <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+    <span class="nav-label">Perfil</span>
+  </a>
+</nav>
+
+</html>

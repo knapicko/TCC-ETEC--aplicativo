@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Política de Privacidade</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/politica.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+  <script defer src="scripts/politica.js"></script>
+  <script defer src="scripts/accessibility.js"></script>
+</head>
+
+<body>
+  <!-- Filtros SVG para daltonismo -->
+  <svg class="daltonism-svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+      <!-- Protanopia (cegueira ao vermelho) -->
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0,
+          0.558, 0.442, 0, 0, 0,
+          0, 0.242, 0.758, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Deuteranopia (cegueira ao verde) -->
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.8, 0.2, 0, 0, 0,
+          0.258, 0.742, 0, 0, 0,
+          0, 0.142, 0.858, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Tritanopia (cegueira ao azul) -->
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0,
+          0, 0.433, 0.567, 0, 0,
+          0, 0.475, 0.525, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+    </defs>
+  </svg>
+
+<header class="header">
+    <button class="back-btn" onclick="goBack()">
+      <img src="./imgs/voltar_branco.png" alt="Voltar" class="back-icon">
+    </button>
+    <h1 class="header-title">Política de Priv.</h1>
+</header>
+
+<!-- Container da Política -->
+<div class="terms-container">
+  <div class="terms-section">
+    <h1>Política de Privacidade – Conserta Já</h1>
+    <p class="last-updated">Última atualização: outubro de 2025</p>
+
+    <div class="terms-content">
+      <p>Esta Política de Privacidade descreve como o Conserta Já coleta, utiliza, armazena e protege as informações pessoais dos usuários. Nos comprometemos a garantir a privacidade e a segurança de todos os dados fornecidos, conforme a Lei Geral de Proteção de Dados (LGPD).</p>
+
+      <h2>1. Dados Coletados</h2>
+      <ul>
+        <li>Informações de cadastro: nome, e-mail, telefone, CPF/CNPJ, tipo de perfil e CEP.</li>
+        <li>Informações de uso: localização aproximada, histórico de serviços e comunicações dentro do app.</li>
+        <li>Informações técnicas: endereço IP, dispositivo e sistema operacional utilizado.</li>
+      </ul>
+
+      <h2>2. Finalidade da Coleta</h2>
+      <ul>
+        <li>Permitir o uso das funcionalidades da plataforma (cadastro, login, pedidos e avaliações).</li>
+        <li>Aprimorar a experiência do usuário e a qualidade dos serviços oferecidos.</li>
+        <li>Garantir segurança, integridade e prevenção de fraudes.</li>
+      </ul>
+
+      <h2>3. Compartilhamento de Dados</h2>
+      <ul>
+        <li>Os dados pessoais não serão vendidos nem compartilhados com terceiros sem consentimento.</li>
+        <li>Poderão ser compartilhados apenas com parceiros tecnológicos (como Firebase e APIs de geolocalização) para funcionamento do app.</li>
+      </ul>
+
+      <h2>4. Armazenamento e Segurança</h2>
+      <ul>
+        <li>Os dados são armazenados em servidores seguros, com criptografia e controle de acesso.</li>
+        <li>Medidas técnicas e administrativas são aplicadas para evitar vazamentos e acessos não autorizados.</li>
+      </ul>
+
+      <h2>5. Direitos do Usuário</h2>
+      <ul>
+        <li>Confirmar a existência de tratamento de dados.</li>
+        <li>Solicitar acesso, correção, portabilidade ou exclusão de seus dados pessoais.</li>
+        <li>Revogar o consentimento a qualquer momento.</li>
+      </ul>
+
+      <h2>6. Retenção e Exclusão de Dados</h2>
+      <ul>
+        <li>Os dados serão mantidos enquanto a conta estiver ativa.</li>
+        <li>Após o encerramento, poderão ser mantidos de forma anonimizada para fins legais e estatísticos.</li>
+      </ul>
+
+      <h2>7. Contato e Dúvidas</h2>
+      <p>Em caso de dúvidas, entre em contato com nosso Encarregado de Dados (DPO) pelo e-mail <a href="mailto:suporte.consertaja@gmail.com">suporte.consertaja@gmail.com</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-navigation">
+  <a href="pedidos.html" class="nav-item" id="btnServicos">
+    <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+    <span class="nav-label">Serviços</span>
+  </a>
+  <a href="home.html" class="nav-item" id="btnHome">
+    <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+    <span class="nav-label">Home</span>
+  </a>
+  <a href="mensagens.html" class="nav-item" id="btnMensagens">
+    <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+    <span class="nav-label">Mensagens</span>
+  </a>
+  <a href="perfil.html" class="nav-item active" id="btnPerfil">
+    <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+    <span class="nav-label">Perfil</span>
+  </a>
+</nav>
+
+</html>

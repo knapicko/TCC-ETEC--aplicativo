@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+  <title>Serviços e Agendamentos</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/pedidos.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="scripts/firebase-config.js"></script>
+  <script defer src="scripts/firebase-init.js"></script>
+  <script defer src="scripts/firebase.js"></script>
+  <script defer src="scripts/pedidos.js"></script>
+  <script defer src="scripts/accessibility.js"></script>
+</head>
+
+<body>
+  <!-- Filtros SVG para daltonismo -->
+  <svg class="daltonism-svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+      <!-- Protanopia (cegueira ao vermelho) -->
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0,
+          0.558, 0.442, 0, 0, 0,
+          0, 0.242, 0.758, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Deuteranopia (cegueira ao verde) -->
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.8, 0.2, 0, 0, 0,
+          0.258, 0.742, 0, 0, 0,
+          0, 0.142, 0.858, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Tritanopia (cegueira ao azul) -->
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0,
+          0, 0.433, 0.567, 0, 0,
+          0, 0.475, 0.525, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+    </defs>
+  </svg>
+
+  <header class="header">
+    <h1 class="header-title">Serviços</h1>
+  </header>
+
+  <main class="main-container">
+    <!-- Navegação de Abas (mobile primeiro) -->
+    <nav class="tab-navigation" id="tabNavigation">
+      <!-- Abas para Paneleiro -->
+      <div class="tabs-paneleiro" id="tabsPaneleiro" style="display: none;">
+        <button class="tab-button active" data-tab="recebidos">Recebidos</button>
+        <button class="tab-button" data-tab="agendados">Agendados</button>
+        <button class="tab-button" data-tab="historico">Histórico</button>
+      </div>
+
+      <!-- Abas para Cliente/Food Service -->
+      <div class="tabs-cliente" id="tabsCliente" style="display: none;">
+        <button class="tab-button active" data-tab="enviados">Enviados</button>
+        <button class="tab-button" data-tab="historico">Histórico</button>
+      </div>
+    </nav>
+
+    <!-- Conteúdo dos Pedidos -->
+    <section class="pedidos-section">
+      <div class="pedidos-grid" id="pedidosGrid">
+        <!-- Pedidos serão carregados dinamicamente -->
+      </div>
+
+      <!-- Estado vazio -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-state-icon">📦</div>
+        <h3 class="empty-state-title">Nenhum pedido encontrado</h3>
+        <p class="empty-state-message">Não há pedidos para mostrar no momento.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation -->
+ <nav class="bottom-navigation">
+      <a href="pedidos.html" class="nav-item active" id="btnServicos">
+        <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+        <span class="nav-label">Serviços</span>
+      </a>
+      <a href="home.html" class="nav-item" id="btnHome">
+        <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="mensagens.html" class="nav-item" id="btnMensagens">
+        <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+        <span class="nav-label">Mensagens</span>
+      </a>
+      <a href="perfil.html" class="nav-item" id="btnPerfil">
+        <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+        <span class="nav-label">Perfil</span>
+      </a>
+    </nav>
+
+  <!-- Modal de Detalhes usando <dialog> -->
+  <dialog class="modal" id="pedidoModal">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 class="modal-title">Detalhes do Serviço</h2>
+        <button class="modal-close" id="modalClose" aria-label="Fechar modal">×</button>
+      </header>
+
+      <div class="modal-body">
+        <div class="pedido-details" id="pedidoDetails">
+          <!-- Detalhes serão carregados dinamicamente -->
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <div class="modal-actions" id="modalActions">
+          <!-- Ações serão carregadas dinamicamente -->
+        </div>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- Modal de Agendamento -->
+  <dialog class="modal" id="agendamentoModal">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 class="modal-title">Agendar Serviço</h2>
+        <button class="modal-close" id="agendamentoModalClose" aria-label="Fechar modal">×</button>
+      </header>
+
+      <div class="modal-body">
+        <form class="form" id="agendamentoForm">
+          <div class="form-field">
+            <label class="form-label" for="agendamentoData">Data</label>
+            <input class="form-input" type="date" id="agendamentoData" required>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="agendamentoHora">Horário</label>
+            <select class="form-select" id="agendamentoHora" required>
+              <option value="">Selecione o horário</option>
+              <option value="08:00">08:00</option>
+              <option value="09:00">09:00</option>
+              <option value="10:00">10:00</option>
+              <option value="11:00">11:00</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="agendamentoNotas">Observações</label>
+            <textarea class="form-textarea" id="agendamentoNotas" placeholder="Observações adicionais..." rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <footer class="modal-footer">
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="btnCancelarAgendamento">Cancelar</button>
+          <button type="submit" form="agendamentoForm" class="btn-primary">Agendar</button>
+        </div>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- Tela Inteira de Novo Pedido -->
+  <div class="modal-overlay fullscreen" id="novoPedidoModal" style="display: none;">
+    <div class="modal-content fullscreen">
+      <header class="modal-header">
+        <h2 class="modal-title">Solicitar Serviço</h2>
+        <button class="modal-close" id="novoPedidoModalClose" aria-label="Fechar modal">×</button>
+      </header>
+
+      <div class="modal-body scrollable">
+        <form class="form" id="novoPedidoForm">
+          <div class="form-field">
+            <label class="form-label" for="servicosSelecionados">Serviços Necessários</label>
+            <div class="checkbox-group" id="servicosCheckboxes">
+              <!-- Serviços serão carregados dinamicamente -->
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="pedidoDescricao">Descrição do Problema <span class="optional">(opcional)</span></label>
+            <textarea class="form-textarea" id="pedidoDescricao" placeholder="Descreva detalhadamente o problema ou serviço necessário..." rows="4"></textarea>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="quantidadePanelas">Quantidade de Panelas</label>
+            <div class="quantity-control">
+              <button type="button" class="quantity-btn" id="btnDiminuirQuantidade">-</button>
+              <input type="number" class="quantity-input" id="quantidadePanelas" value="1" min="1" max="50" readonly>
+              <button type="button" class="quantity-btn" id="btnAumentarQuantidade">+</button>
+            </div>
+          </div>
+
+          <!-- Seção para especificar serviços por panela -->
+          <div class="form-field" id="servicosPorPanelaContainer" style="display: none;">
+            <label class="form-label">Especificar Serviços por Panela</label>
+            <small class="form-hint">Selecione quais serviços cada panela precisa</small>
+            <div id="servicosPorPanela" class="servicos-por-panela">
+              <!-- Será preenchido dinamicamente -->
+            </div>
+          </div>
+
+
+
+          <div class="form-field">
+            <label class="form-label">Endereço para o Serviço</label>
+            <div class="enderecos-selecao" id="enderecosSelecao">
+              <!-- Cards de endereço serão carregados dinamicamente -->
+            </div>
+            <input type="hidden" id="pedidoEndereco" required>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="tipoEntrega">Como será feita a entrega?</label>
+            <select class="form-select" id="tipoEntrega" required>
+              <option value="">Selecione uma opção</option>
+              <option value="buscar">Cliente buscará no local do paneleiro</option>
+              <option value="entregar">Paneleiro entregará no cliente</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="prioridadePedido">Prioridade</label>
+            <select class="form-select" id="prioridadePedido" required>
+              <option value="Baixa">Baixa - Sem pressa</option>
+              <option value="Média">Média - Em alguns dias</option>
+              <option value="Alta">Alta - Urgente</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="dataMaximaEntrega">Data Máxima de Entrega</label>
+            <input class="form-input" type="date" id="dataMaximaEntrega" min="" required>
+            <small class="form-hint">Defina até quando o serviço deve ser concluído (mínimo 1 dia a partir de hoje)</small>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="pedidoValorEstimado">Valor Estimado (R$)</label>
+            <input class="form-input" type="number" id="pedidoValorEstimado" step="0.01" min="0" readonly>
+            <small class="form-hint">Valor calculado automaticamente baseado nos serviços selecionados</small>
+          </div>
+        </form>
+      </div>
+
+      <footer class="modal-footer">
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="btnCancelarNovoPedido">Cancelar</button>
+          <button type="submit" form="novoPedidoForm" class="btn-primary">Enviar Solicitação</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+- [ ] Analisar o arquivo criar_conta.html para entender a estrutura atual
+- [ ] Analisar o arquivo criar_conta.css para identificar os problemas
+- [ ] Verificar o arquivo criar_conta.js para entender a lógica dos labels animados
+- [ ] Corrigir os labels animados para funcionarem corretamente apenas após ativação do usuário
+- [ ] Ajustar o espaçamento entre os inputs de email e senha
+- [ ] Testar as correções

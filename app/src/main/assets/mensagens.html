@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mensagens</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet (mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <link rel="stylesheet" href="css/mensagens.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+
+  <!-- Firebase -->
+  <script defer src="scripts/utils.js"></script>
+  <script src="scripts/firebase-config.js"></script>
+  <script defer src="scripts/firebase-init.js"></script>
+  <script defer src="scripts/firebase.js"></script>
+
+  <script defer src="scripts/mensagens.js"></script>
+  <script defer src="scripts/accessibility.js"></script>
+</head>
+
+ <header class="topbar">
+        <h1 class="titulo">Mensagens</h1>
+</header>
+
+<body>
+  <!-- Filtros SVG para daltonismo -->
+  <svg class="daltonism-svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+      <!-- Protanopia (cegueira ao vermelho) -->
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0,
+          0.558, 0.442, 0, 0, 0,
+          0, 0.242, 0.758, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Deuteranopia (cegueira ao verde) -->
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.8, 0.2, 0, 0, 0,
+          0.258, 0.742, 0, 0, 0,
+          0, 0.142, 0.858, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Tritanopia (cegueira ao azul) -->
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0,
+          0, 0.433, 0.567, 0, 0,
+          0, 0.475, 0.525, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="app">
+    <!-- Lista de Conversas -->
+    <div class="conversations-list" id="conversationsList">
+      <!-- Conversas serão carregadas dinamicamente -->
+    </div>
+
+    <!-- Chat Container (inicialmente oculto) -->
+    <div class="chat-container" id="chatContainer" style="display: none;">
+      <!-- Chat Header -->
+      <div class="chat-header">
+        <button class="back-btn" id="backBtn">
+          <img src="./imgs/voltar_azul.png" alt="Voltar" class="back-icon">
+        </button>
+        <div class="chat-user-info">
+          <img src="./imgs/perfil.png" alt="Contato" class="chat-avatar" id="chatAvatar">
+          <div class="chat-user-details">
+            <h3 id="chatName">Nome do Contato</h3>
+            <span class="chat-status" id="chatStatus">Online</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="messages-area" id="messagesArea">
+        <!-- Messages will be loaded here -->
+      </div>
+
+      <!-- Message Input -->
+      <div class="message-input-container">
+        <div class="message-input-wrapper">
+          <input type="text" id="messageInput" placeholder="Digite sua mensagem..." class="message-input">
+          <button class="attachment-btn-inside" id="attachmentBtn">
+            <img src="./imgs/clip.png" alt="Anexar" class="attachment-icon">
+          </button>
+        </div>
+        <button class="audio-send-btn-circle" id="audioSendBtn">
+          <img src="./imgs/audio.png" alt="Áudio" class="audio-send-icon" id="audioSendIcon">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Imagem (estilo WhatsApp) -->
+  <div id="imageModal" class="image-modal" style="display: none;">
+    <div class="image-modal-overlay" id="imageModalOverlay"></div>
+    <div class="image-modal-content">
+      <div class="image-modal-header">
+        <button class="image-modal-close" id="imageModalClose">✕</button>
+      </div>
+
+      <div class="image-modal-body">
+        <div class="image-preview-container">
+          <img id="imagePreview" src="" alt="Imagem selecionada" class="image-preview">
+        </div>
+
+
+      </div>
+
+      <div class="image-modal-footer">
+        <input type="text" id="imageCaption" placeholder="Adicione uma legenda..." class="image-caption-input" maxlength="100">
+        <div class="image-modal-buttons">
+          <button class="image-cancel-btn" id="imageCancelBtn">Cancelar</button>
+          <button class="image-send-btn" id="imageSendBtn">
+            <img src="./imgs/enviar.png" alt="Enviar" class="send-icon">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-navigation">
+  <a href="pedidos.html" class="nav-item" id="btnServicos">
+    <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+    <span class="nav-label">Serviços</span>
+  </a>
+  <a href="home.html" class="nav-item" id="btnHome">
+    <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+    <span class="nav-label">Home</span>
+  </a>
+  <a href="mensagens.html" class="nav-item active" id="btnMensagens">
+    <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+    <span class="nav-label">Mensagens</span>
+  </a>
+  <a href="perfil.html" class="nav-item" id="btnPerfil">
+    <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+    <span class="nav-label">Perfil</span>
+  </a>
+</nav>
+
+
+</body>
+</html>

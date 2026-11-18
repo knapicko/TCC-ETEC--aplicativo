@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Tipo de Usuário</title>
+    <link rel="stylesheet" href="css/tipo_user.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<h1 class="texto">Identifique seu <br>tipo de usuário</h1>
+
+<!-- Botão voltar no canto superior direito -->
+<button id="btnVoltarTipo" class="btn-voltar-topo">
+    <img src="./imgs/voltar_branco.png" alt="Voltar">
+</button>
+
+<div class="usuarios">
+    <div class="opcoes">
+        <div class="option-item" data-type="Cliente">
+            <img src="./imgs/a1.png" class="op1" alt="Cliente">
+            <span>Cliente</span>
+        </div>
+        <div class="option-item" data-type="Paneleiro">
+            <img src="./imgs/a2.png" class="op2" alt="Paneleiro">
+            <span>Paneleiro</span>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <button id="btnConfirmarTipo" class="btn-primary" disabled>Confirmar</button>
+</div>
+
+<!-- Firebase SDK removido - usando interface Android -->
+<script src="scripts/tipo_user_simple.js"></script>
+</body>
+</html>

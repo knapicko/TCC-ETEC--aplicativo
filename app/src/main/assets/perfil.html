@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Perfil</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet (mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Firebase SDK v9 -->
+  <script src="scripts/firebase-config.js"></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = window.firebaseConfig;
+
+    // Initialize Firebase
+    if (!firebaseConfig || !firebaseConfig.apiKey || !firebaseConfig.projectId) {
+      throw new Error('Firebase local config missing. See README.md.');
+    }
+
+    const app = initializeApp(firebaseConfig);
+    window.auth = getAuth(app);
+    window.db = getFirestore(app);
+    window.rtdb = getDatabase(app);
+
+    // Expor funções do Firestore para uso global
+    window.firestoreCollection = collection;
+    window.firestoreQuery = query;
+    window.firestoreWhere = where;
+    window.firestoreGetDocs = getDocs;
+
+    window.rtdbRef = ref;
+    window.rtdbGet = get;
+
+    console.log("✅ Firebase v9 inicializado com sucesso no perfil!");
+    // Sinalizar que Firebase está pronto
+    window.firebaseReady = true;
+  </script>
+
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <link rel="stylesheet" href="css/perfil.css" />
+  <link rel="stylesheet" href="css/accessibility.css" />
+  <script src="scripts/utils.js"></script>
+  <script>
+    // Global error handler to prevent app crash
+    window.addEventListener('error', function(e) {
+      console.error('Global error:', e.error);
+      e.preventDefault();
+    });
+
+    window.addEventListener('unhandledrejection', function(e) {
+      console.error('Unhandled promise rejection:', e.reason);
+      e.preventDefault();
+    });
+  </script>
+  <script src="scripts/perfil.js" onload="console.log('Script perfil.js carregado')"></script>
+  <script src="scripts/accessibility.js"></script>
+</head>
+
+<body>
+  <!-- Filtros SVG para daltonismo -->
+  <svg class="daltonism-svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <defs>
+      <!-- Protanopia (cegueira ao vermelho) -->
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.567, 0.433, 0, 0, 0,
+          0.558, 0.442, 0, 0, 0,
+          0, 0.242, 0.758, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Deuteranopia (cegueira ao verde) -->
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.8, 0.2, 0, 0, 0,
+          0.258, 0.742, 0, 0, 0,
+          0, 0.142, 0.858, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+
+      <!-- Tritanopia (cegueira ao azul) -->
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+          0.95, 0.05, 0, 0, 0,
+          0, 0.433, 0.567, 0, 0,
+          0, 0.475, 0.525, 0, 0,
+          0, 0, 0, 1, 0
+        "/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Loading overlay -->
+  <div id="loading" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; align-items: center; justify-content: center; z-index: 9999;">
+    <div style="text-align: center;">
+      <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #0095f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px;"></div>
+      <p style="color: #666; font-size: 16px;">Carregando...</p>
+    </div>
+  </div>
+
+  <!-- Header do estilo dos pedidos -->
+  <header class="header">
+    <h1 class="header-title">Perfil</h1>
+  </header>
+
+  <!-- Header com foto, nome e avaliação -->
+  <header class="profile-header">
+    <div class="profile-header-content">
+      <div class="profile-avatar-section">
+        <img id="profilePhoto" src="./imgs/perfil.png" alt="Foto de Perfil" class="profile-avatar">
+        <button id="editProfileBtn" class="edit-profile-btn">
+          <img src="./imgs/ico1.png" alt="Editar" class="edit-icon">
+        </button>
+      </div>
+
+      <div class="profile-info-section">
+        <h1 id="userName" class="profile-name">-</h1>
+        <div class="profile-rating">
+          <div class="stars" id="ratingStars">
+            <!-- Estrelas serão inseridas dinamicamente -->
+          </div>
+          <span id="ratingValue" class="rating-value">(0.0)</span>
+        </div>
+        <div class="address-section">
+          <span class="address-label">Endereço:</span>
+          <p id="userAddress" class="profile-description">-</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Serviços prestados -->
+    <div class="services-section">
+      <h3>Serviços Prestados</h3>
+      <div id="servicesList" class="services-list">
+        <!-- Serviços serão inseridos dinamicamente -->
+      </div>
+
+      <button id="editServicesBtn" class="edit-services-btn">Editar Serviços</button>
+    </div>
+
+    <!-- Botões de configurações e logout -->
+    <div class="profile-actions">
+      <button id="btnSettings" class="action-btn settings-btn">
+        Configurações
+      </button>
+      <button id="btnLogout" class="action-btn logout-btn">
+        Sair
+      </button>
+    </div>
+  </header>
+
+  <!-- Abas de navegação -->
+  <nav class="profile-tabs">
+    <button id="postsTab" class="tab-btn active">
+      <span class="tab-icon"></span>
+      <span class="tab-label">Posts</span>
+    </button>
+    <button id="reviewsTab" class="tab-btn">
+      <span class="tab-icon"></span>
+      <span class="tab-label">Avaliações</span>
+    </button>
+  </nav>
+
+  <!-- Conteúdo das abas -->
+  <main class="profile-content">
+    <!-- Aba Posts -->
+    <div id="postsContent" class="tab-content active">
+      <!-- Botão para postar nova imagem -->
+      <div class="post-input-section">
+        <button id="newPostBtn" class="new-post-btn">
+          <span class="post-icon">+</span>
+          <span>Compartilhar novo trabalho</span>
+        </button>
+      </div>
+
+      <!-- Grid de posts -->
+      <div id="postsGrid" class="posts-grid">
+        <!-- Posts serão inseridos dinamicamente -->
+      </div>
+    </div>
+
+    <!-- Aba Avaliações -->
+    <div id="reviewsContent" class="tab-content">
+      <div class="reviews-summary">
+        <div class="rating-overview">
+          <div class="average-rating">
+            <span id="averageRating" class="big-rating">0.0</span>
+            <div class="stars" id="averageStars">
+              <!-- Estrelas serão inseridas dinamicamente -->
+            </div>
+          </div>
+          <div class="rating-breakdown">
+            <div class="rating-bar">
+              <span class="rating-label">5★</span>
+              <div class="rating-progress">
+                <div class="rating-fill" id="rating5Fill" style="width: 0%"></div>
+              </div>
+              <span class="rating-count" id="rating5Count">0</span>
+            </div>
+            <div class="rating-bar">
+              <span class="rating-label">4★</span>
+              <div class="rating-progress">
+                <div class="rating-fill" id="rating4Fill" style="width: 0%"></div>
+              </div>
+              <span class="rating-count" id="rating4Count">0</span>
+            </div>
+            <div class="rating-bar">
+              <span class="rating-label">3★</span>
+              <div class="rating-progress">
+                <div class="rating-fill" id="rating3Fill" style="width: 0%"></div>
+              </div>
+              <span class="rating-count" id="rating3Count">0</span>
+            </div>
+            <div class="rating-bar">
+              <span class="rating-label">2★</span>
+              <div class="rating-progress">
+                <div class="rating-fill" id="rating2Fill" style="width: 0%"></div>
+              </div>
+              <span class="rating-count" id="rating2Count">0</span>
+            </div>
+            <div class="rating-bar">
+              <span class="rating-label">1★</span>
+              <div class="rating-progress">
+                <div class="rating-fill" id="rating1Fill" style="width: 0%"></div>
+              </div>
+              <span class="rating-count" id="rating1Count">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="total-reviews">
+          <span id="totalReviewsCount" class="reviews-count">0</span>
+          <span class="reviews-label">avaliações</span>
+        </div>
+      </div>
+
+      <!-- Lista de avaliações -->
+      <div id="reviewsList" class="reviews-list">
+        <!-- Avaliações serão inseridas dinamicamente -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-navigation">
+    <a href="pedidos.html" class="nav-item" id="btnServicos">
+      <img src="./imgs/pedidoicon.png" alt="Serviços" class="nav-icon">
+      <span class="nav-label">Serviços</span>
+    </a>
+    <a href="home.html" class="nav-item" id="btnHome">
+      <img src="./imgs/mapaicon.png" alt="Home" class="nav-icon">
+      <span class="nav-label">Home</span>
+    </a>
+    <a href="mensagens.html" class="nav-item" id="btnMensagens">
+      <img src="./imgs/chaticon.png" alt="Mensagens" class="nav-icon">
+      <span class="nav-label">Mensagens</span>
+    </a>
+    <a href="perfil.html" class="nav-item active" id="btnPerfil">
+      <img src="./imgs/perfilicon.png" alt="Perfil" class="nav-icon">
+      <span class="nav-label">Perfil</span>
+    </a>
+  </nav>
+
+  <!-- Modal para editar perfil -->
+  <div id="editProfileModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeEditProfileModal">&times;</span>
+      <h3>Editar Perfil</h3>
+      <form id="editProfileForm">
+        <div class="form-group">
+          <label for="editName">Nome</label>
+          <input type="text" id="editName" required>
+        </div>
+        <div class="form-group">
+          <label for="editDescription">Descrição (Endereço)</label>
+          <textarea id="editDescription" rows="3" placeholder="Descreva seu endereço ou localização"></textarea>
+        </div>
+        <button type="submit" class="save-btn">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para editar serviços -->
+  <div id="editServicesModal" class="modal">
+    <div class="modal-content" style="padding: 20px;">
+      <span class="close" id="closeEditServicesModal">&times;</span>
+      <h3 style="margin-bottom: 20px;">Editar Serviços</h3>
+      <form id="editServicesForm">
+        <div class="form-group">
+          <label for="servicesText" style="display: block; margin-bottom: 8px;">Serviços Prestados</label>
+          <textarea id="servicesText" rows="4" placeholder="Digite os serviços que você presta, separados por vírgula" style="width: 100%; padding: 12px; border: 1px solid #dbdbdb; border-radius: 6px; font-size: 14px; font-family: 'Poppins', sans-serif; resize: vertical;"></textarea>
+        </div>
+        <button type="submit" class="save-btn" style="margin-top: 20px;">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para novo post -->
+  <div id="newPostModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeNewPostModal">&times;</span>
+      <h3>Novo Post</h3>
+      <form id="newPostForm">
+        <div class="form-group">
+          <label for="postImage">Selecionar Imagem</label>
+          <input type="file" id="postImage" accept="image/*" required>
+          <div id="imagePreview" class="image-preview"></div>
+        </div>
+        <div class="form-group">
+          <label for="postCaption">Legenda</label>
+          <textarea id="postCaption" rows="3" placeholder="Descreva seu trabalho..."></textarea>
+        </div>
+        <button type="submit" class="save-btn">Publicar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Imagem (estilo WhatsApp) -->
+  <div id="imageModal" class="image-modal" style="display: none;">
+    <div class="image-modal-overlay" id="imageModalOverlay"></div>
+    <div class="image-modal-content">
+      <div class="image-modal-header">
+        <button class="image-modal-close" id="imageModalClose">✕</button>
+      </div>
+
+      <div class="image-modal-body">
+        <div class="image-preview-container">
+          <img id="modalImagePreview" src="" alt="Imagem selecionada" class="image-preview">
+        </div>
+
+
+      </div>
+
+      <div class="image-modal-footer">
+        <input type="text" id="imageCaption" placeholder="Adicione uma legenda..." class="image-caption-input" maxlength="100">
+        <div class="image-modal-buttons">
+          <button class="image-cancel-btn" id="imageCancelBtn">Cancelar</button>
+          <button class="image-send-btn" id="imageSendBtn">
+            <img src="./imgs/enviar.png" alt="Enviar" class="send-icon">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
